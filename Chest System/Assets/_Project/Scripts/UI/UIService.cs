@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ChestSystem
+namespace ChestSystem.UI.Service
 {
     public class UIService : MonoBehaviour
     {
