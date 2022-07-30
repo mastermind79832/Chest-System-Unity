@@ -8,6 +8,7 @@ namespace ChestSystem.UI
     public class UIService : MonoSingletonGeneric<UIService>
     {
         public ModalWindow ModalWindow;
+        public SlotManager SlotManager;
 
         // Start is called before the first frame update
         void Start()

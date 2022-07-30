@@ -92,13 +92,13 @@ namespace ChestSystem.UI
 			m_Header.SetActive(true);
 			t_HeaderText.text = headerText;
 		}
-		private void SetConfirmButton(string confrirmText, ref Action onConfirm)
+		private void SetConfirmButton(string confrirmText, Action onConfirm)
 		{
 			m_ConfirmButton.SetActive(true);
 			t_ConfirmButtonText.text = confrirmText;
 			m_OnConfirm = onConfirm;
 		}
-		private void SetDeclineButton(string declineText, ref Action onDecline)
+		private void SetDeclineButton(string declineText, Action onDecline)
 		{
 			m_DeclineButton.SetActive(true);
 			t_DeclineButtonText.text = declineText;
@@ -123,15 +123,15 @@ namespace ChestSystem.UI
 			m_GemDisplay.SetActive(true);
 			t_GemAmount.text = $"{GemAmount}";
 		}
-        private void SetFooter(string confrirmText, ref Action onConfirm)
+        private void SetFooter(string confrirmText, Action onConfirm)
         {
             m_Footer.SetActive(true);
-            SetConfirmButton(confrirmText, ref onConfirm);
+            SetConfirmButton(confrirmText, onConfirm);
         }
-		private void SetFooter(string confrirmText, ref Action onConfirm, string declineText, ref Action onDecline)
+		private void SetFooter(string confrirmText, Action onConfirm, string declineText, Action onDecline)
 		{
-			SetFooter(confrirmText, ref onConfirm);
-			SetDeclineButton(declineText, ref onDecline);
+			SetFooter(confrirmText, onConfirm);
+			SetDeclineButton(declineText, onDecline);
 		}
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace ChestSystem.UI
 		{
 			SetHeader(headerText);
 			SetContent(contentText);
-			SetFooter(confrirmText, ref onConfirm, declineText, ref onDecline);
+			SetFooter(confrirmText, onConfirm, declineText, onDecline);
 		}
 
 		/// <summary>
@@ -151,7 +151,7 @@ namespace ChestSystem.UI
 		{
             SetHeader(headerText);
             SetContent(contentText);
-            SetFooter(confrirmText, ref onConfrim);
+            SetFooter(confrirmText, onConfrim);
 		}
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace ChestSystem.UI
 		{
 			SetHeader(headerText);
 			SetContent(contentText, coinAmount, GemAmount);
-			SetFooter(confrirmText, ref onConfrim);
+			SetFooter(confrirmText, onConfrim);
 		}
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace ChestSystem.UI
 			SetHeader(headerText);
 			SetChest(bottom, top);
 			SetContent(contentText, coinAmount, GemAmount);
-			SetFooter(confrirmText, ref onConfrim);
+			SetFooter(confrirmText, onConfrim);
 		}
 
 	}

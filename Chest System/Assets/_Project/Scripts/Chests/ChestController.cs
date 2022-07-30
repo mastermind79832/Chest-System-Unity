@@ -25,7 +25,8 @@ namespace ChestSystem.Chest
 
 		private float m_PrevTime; // used to store the time just before decreasing the timer
         private float m_Timer;
-		public Action<int> OnTimerUpdated;
+		public float RemainingTime { get { return m_Timer; } }
+		public Action<float> OnTimerUpdated;
 
         private ChestState m_State;
 		public ChestState State { get { return m_State; } }
@@ -36,6 +37,8 @@ namespace ChestSystem.Chest
 			m_ChestTop.sprite = null;
 			m_Chestbottom.sprite = null;
 		}
+
+		public bool IsState(ChestState state) => m_State == state;
 
 		public void Initialize(ChestSO newChestType)
 		{
@@ -74,11 +77,12 @@ namespace ChestSystem.Chest
 			if((m_Timer - m_PrevTime) > 1)
 			{
 				m_PrevTime = m_Timer;
-				OnTimerUpdated((int)m_Timer);
+				OnTimerUpdated(m_Timer);
 			}
 		}
 		private bool IsTimerOver() => m_Timer <= 0;
 		private void ChangeState(ChestState state) => m_State = state;
+		public void QuickUnlock() => ChangeState(ChestState.Unlocked);
 
 		public void Open(out int coinAmount, out int gemAmount)
 		{
