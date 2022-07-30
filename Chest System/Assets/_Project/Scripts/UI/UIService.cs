@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChestSystem.Core;
 
-namespace ChestSystem.UI.Service
+namespace ChestSystem.UI
 {
-    public class UIService : MonoBehaviour
+    public class UIService : MonoSingletonGeneric<UIService>
     {
+        public ModalWindow ModalWindow;
+
         // Start is called before the first frame update
         void Start()
         {
-        
+            ModalWindow.ShowMessage("Welcome", "Time to start Exploring", "Lets GO!!");
         }
 
         // Update is called once per frame
