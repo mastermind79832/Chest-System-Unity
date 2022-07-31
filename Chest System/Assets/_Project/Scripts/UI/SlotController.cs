@@ -23,12 +23,19 @@ namespace ChestSystem.UI
             window = UIService.Instance.ModalWindow;
 			manager = UIService.Instance.SlotManager;
 			m_Chest.OnTimerUpdated += UpdateTime;
+			m_Chest.OnChestTimerOver += ReadyForUnlock;
             EmptySlot();
 		}
 
         public void UpdateTime(float value)
 		{
 			m_Time.text = TimeToString(value);
+		}
+
+		public void ReadyForUnlock()
+		{
+			manager.SetUnlocking(null);
+			m_Time.text = "READY";
 		}
 
 		private static string TimeToString(float value)
@@ -76,13 +83,14 @@ namespace ChestSystem.UI
 				return;
 			}
 			manager.ItemManager.AddGem((int)m_Chest.RemainingTime * -1);
-			OpenChest();
+			m_Chest.QuickUnlock();
 		}
 
 		public void SetChest(ChestTypeSO chestType)
 		{
 			m_Chest.Initialize(chestType);
 			m_Time.text = $"{TimeToString(m_Chest.RemainingTime)}";
+			m_UnlockButton.SetActive(true);
 		}
 
 		private void OpenChest()
@@ -96,10 +104,11 @@ namespace ChestSystem.UI
 		}
 		private void EmptySlot()
 		{
-            m_Time.text = "EMPTY";
             m_Chest.ResetChest();
 			manager.SetUnlocking(null);
-			manager.freeSlot(this);
+			manager.FreeSlot(this);
+			m_UnlockButton.SetActive(false);
+            m_Time.text = "EMPTY";
 		}
 	}
 }

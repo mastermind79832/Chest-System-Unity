@@ -22,29 +22,23 @@ namespace ChestSystem.UI
 		{
 			window = UIService.Instance.ModalWindow;
 			ItemManager = GetComponent<ItemManager>();
-			FreeAllSlots();
-		}
-
-		private void FreeAllSlots()
-		{
 			m_freeSlots = new Queue<SlotController>();
-			foreach (SlotController slot in m_Slots)
-				freeSlot(slot);
+
 		}
 
 		public void SetUnlocking(SlotController slot) => m_CurrentUnlocking = slot;
 		public bool IsAlreadyUnlocking()
 		{
-			if (m_CurrentUnlocking != null)
+			if (m_CurrentUnlocking == null)
 				return false;
 
-			window.ShowConfirmation("OCCUPIED", "Something is Currently unlocking\nDo you want to unlock now","Unlock Now",m_CurrentUnlocking.QuickUnlock,"Later",null);
+			window.ShowConfirmation("OCCUPIED", "Something is Currently unlocking\nTry to free the slot","Unlock Now",m_CurrentUnlocking.QuickUnlock,"Later",null);
 			return true;
 		}
 
 		public bool IsSlotAvailabile()
 		{
-			if(m_Slots.Length > 0)
+			if(m_freeSlots.Count > 0)
 				return true;
 
 			window.ShowMessage("OOPS!", "You dont have any free slot\nGo unlock Chest to free slots", "On It!");
@@ -54,7 +48,7 @@ namespace ChestSystem.UI
 		public void AddChest(ChestTypeSO chestType)
 		{
 			window.ShowMessage("New Chest",
-				$"You Have gotten {chestType.ChestName}",
+				$"You Have gotten {chestType.name} Chest",
 				chestType.BottomSprite,
 				chestType.TopSprite,
 				$"{chestType.CoinRange.Min}-{chestType.CoinRange.Max}",
@@ -64,7 +58,7 @@ namespace ChestSystem.UI
 			freeSlot.SetChest(chestType);
 		}
 
-		public void freeSlot(SlotController slot)
+		public void FreeSlot(SlotController slot)
 		{
 			m_freeSlots.Enqueue(slot);
 		}

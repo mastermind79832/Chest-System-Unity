@@ -62,28 +62,32 @@ namespace ChestSystem.UI
 
         public void Confirm()
 		{
-            m_OnConfirm?.Invoke();
             Close();
+            m_OnConfirm?.Invoke();
 		}
         public void Decline()
 		{
-            m_OnDecline?.Invoke();
             Close();
-        }
+            m_OnDecline?.Invoke();
+		}
 
         private void Close()
 		{
-            m_OnConfirm = null;
-            m_OnDecline = null;
-            m_DeclineButton.SetActive(false);
-            m_ConfirmButton.SetActive(false);
-            m_Footer.SetActive(false);
-            m_GemDisplay.SetActive(false);
-            m_CoinDisplay.SetActive(false);
-            m_Content.SetActive(false);
-            m_Header.SetActive(false);
-            m_Chest.SetActive(false);
-            m_ModelPanel.SetActive(false);
+			m_DeclineButton.SetActive(false);
+			m_ConfirmButton.SetActive(false);
+			m_Footer.SetActive(false);
+			m_GemDisplay.SetActive(false);
+			m_CoinDisplay.SetActive(false);
+			m_Content.SetActive(false);
+			m_Header.SetActive(false);
+			m_Chest.SetActive(false);
+			m_ModelPanel.SetActive(false);
+		}
+
+		private void ResetAction()
+		{
+			m_OnConfirm = null;
+			m_OnDecline = null;
 		}
 
 		private void SetHeader(string headerText)

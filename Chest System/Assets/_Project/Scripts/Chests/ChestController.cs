@@ -23,10 +23,10 @@ namespace ChestSystem.Chest
 
         private ChestTypeSO chestModel;
 
-		private float m_PrevTime; // used to store the time just before decreasing the timer
         private float m_Timer;
 		public float RemainingTime { get { return m_Timer; } }
 		public Action<float> OnTimerUpdated;
+		public Action OnChestTimerOver;
 
         private ChestState m_State;
 		public ChestState State { get { return m_State; } }
@@ -39,18 +39,17 @@ namespace ChestSystem.Chest
 		}
 
 		public bool IsState(ChestState state) => m_State == state;
-
 		public void Initialize(ChestTypeSO newChestType)
 		{
 			chestModel = newChestType;
 			ChangeState(ChestState.Locked);
 			m_Timer = chestModel.UnlockTime;
-			m_PrevTime = m_Timer;
 			InitChest();
 		}
 
 		private void InitChest()
 		{
+			ChestSpriteEnable(true);
 			m_ChestTop.sprite = chestModel.TopSprite;
 			m_Chestbottom.sprite = chestModel.BottomSprite;
 		}
@@ -66,23 +65,26 @@ namespace ChestSystem.Chest
 			{
 				DecreaseTimer();
 				if (IsTimerOver())
+				{
 					ChangeState(ChestState.Unlocked);
+					OnChestTimerOver();
+				}
 			}
 		}
 
 		private void DecreaseTimer()
 		{
 			m_Timer -= Time.deltaTime;
-			
-			if((m_Timer - m_PrevTime) > 1)
-			{
-				m_PrevTime = m_Timer;
-				OnTimerUpdated(m_Timer);
-			}
+			OnTimerUpdated(m_Timer);
+
 		}
 		private bool IsTimerOver() => m_Timer <= 0;
 		private void ChangeState(ChestState state) => m_State = state;
-		public void QuickUnlock() => ChangeState(ChestState.Unlocked);
+		public void QuickUnlock()
+		{
+			ChangeState(ChestState.Unlocked);
+			OnChestTimerOver();
+		}
 
 		public void Open(out int coinAmount, out int gemAmount)
 		{
@@ -93,8 +95,14 @@ namespace ChestSystem.Chest
 		public void ResetChest()
 		{
 			chestModel = null;
-			m_ChestTop.sprite = null;
-			m_Chestbottom.sprite = null;
+			ChestSpriteEnable(false);
+			ChangeState(ChestState.Locked);
+		}
+
+		private void ChestSpriteEnable(bool enable)
+		{
+			m_ChestTop.enabled = enable;
+			m_Chestbottom.enabled = enable;
 		}
 	}
 }

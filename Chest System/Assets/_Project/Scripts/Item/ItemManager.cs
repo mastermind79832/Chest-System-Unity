@@ -15,20 +15,28 @@ namespace ChestSystem.Item
         [SerializeField]
         private TextMeshProUGUI m_GemText;
 
-        public void AddCoin(int value)
+		private void Start()
+		{
+            m_coins = 10000;
+            m_Gems = 10000;
+            AddCoin(0);
+            AddGem(0);
+		}
+
+		public void AddCoin(int value)
         {
             m_coins += value;
-            m_CoinText.text = value.ToString();
+            m_CoinText.text = m_coins.ToString();
         }
 
         public void AddGem(int value)
         {
             m_Gems += value;
-            m_GemText.text = value.ToString();
+            m_GemText.text = m_Gems.ToString();
         }
 
-        public bool CheckCoins(int value) => m_coins > value;
-        public bool CheckGems(int value) => m_Gems > value;
+        public bool CheckCoins(int value) => m_coins >= value;
+        public bool CheckGems(int value) => m_Gems >= value;
 
     }
 }

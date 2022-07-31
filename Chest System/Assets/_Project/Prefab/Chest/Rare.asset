@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41016f44e02ec5945a198c4fafd68547, type: 3}
+  m_Name: Rare
+  m_EditorClassIdentifier: 
+  ChestName: Rare
+  CoinRange:
+    Min: 300
+    Max: 500
+  GemRange:
+    Min: 20
+    Max: 40
+  UnlockTime: 18
+  TopSprite: {fileID: 21300000, guid: b0bb070b02cc79b4990c995cc7bd8d29, type: 3}
+  BottomSprite: {fileID: 21300000, guid: 49b2ec048b2a0e54ba17bf30d54c5d86, type: 3}
