@@ -1,4 +1,5 @@
 using ChestSystem.Chest;
+using ChestSystem.Item;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,16 +16,18 @@ namespace ChestSystem.UI
 		private Queue<SlotController> m_freeSlots;
 
 		private ModalWindow window;
+		public ItemManager ItemManager { get; private set; }
 
 		private void Start()
 		{
 			window = UIService.Instance.ModalWindow;
+			ItemManager = GetComponent<ItemManager>();
 			FreeAllSlots();
 		}
 
 		private void FreeAllSlots()
 		{
-			m_Slots = new SlotController[m_Slots.Length];
+			m_freeSlots = new Queue<SlotController>();
 			foreach (SlotController slot in m_Slots)
 				freeSlot(slot);
 		}

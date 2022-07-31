@@ -66,17 +66,17 @@ namespace ChestSystem.UI
 
 		public void QuickUnlock()
 		{
-			window.ShowConfirmation("Unlocking Cost", $"Do You Want To unlock now for {m_Chest.RemainingTime} ?","Unlock Now",ConfirmQuickUnlock,"Later",null);
+			window.ShowConfirmation("Unlocking Cost", $"Do You Want To unlock now for {(int)m_Chest.RemainingTime} ?","Unlock Now",ConfirmQuickUnlock,"Later",null);
 		}
 		private void ConfirmQuickUnlock()
 		{
-			// Check if gems are available
-			// if not
-			window.ShowMessage("OOPS!", "You don't have enough Gems!", "Earn More");
-
-			// if awailable
-			// reduce gems
-			// Open Chest
+			if(!manager.ItemManager.CheckGems((int)m_Chest.RemainingTime))
+			{
+				window.ShowMessage("OOPS!", "You don't have enough Gems!", "Earn More");
+				return;
+			}
+			manager.ItemManager.AddGem((int)m_Chest.RemainingTime * -1);
+			OpenChest();
 		}
 
 		public void SetChest(ChestTypeSO chestType)
@@ -90,7 +90,8 @@ namespace ChestSystem.UI
 			m_Chest.Open(out int CoinAmount, out int GemAmount);
 			window.ShowMessage("OPENED", "Congradulations", CoinAmount.ToString(), GemAmount.ToString(), "Aquire");
 
-			//Add items to their storage
+			manager.ItemManager.AddCoin(CoinAmount);
+			manager.ItemManager.AddGem(GemAmount);
 			EmptySlot();
 		}
 		private void EmptySlot()
