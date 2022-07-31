@@ -115,13 +115,13 @@ namespace ChestSystem.UI
 			m_Content.SetActive(true);
 			t_ContentText.text = contentText;
 		}
-		private void SetContent(string contentText, int coinAmount, int GemAmount)
+		private void SetContent(string contentText, string coinAmount, string GemAmount)
 		{
 			SetContent(contentText);
 			m_CoinDisplay.SetActive(true);
-			t_CoinAmount.text = $"{coinAmount}";
+			t_CoinAmount.text = coinAmount;
 			m_GemDisplay.SetActive(true);
-			t_GemAmount.text = $"{GemAmount}";
+			t_GemAmount.text = GemAmount;
 		}
         private void SetFooter(string confrirmText, Action onConfirm)
         {
@@ -157,7 +157,7 @@ namespace ChestSystem.UI
         /// <summary>
         /// To show Message with items
         /// </summary>
-        public void ShowMessage(string headerText, string contentText, int coinAmount, int GemAmount, string confrirmText = "Yeay", Action onConfrim = null)
+        public void ShowMessage(string headerText, string contentText, string coinAmount, string GemAmount, string confrirmText = "Yeay", Action onConfrim = null)
 		{
 			SetHeader(headerText);
 			SetContent(contentText, coinAmount, GemAmount);
@@ -167,7 +167,7 @@ namespace ChestSystem.UI
         /// <summary>
         /// To show Message with Chest
         /// </summary>
-        public void ShowMessage(string headerText, string contentText, Sprite bottom, Sprite top, int coinAmount, int GemAmount, string confrirmText = "Yeay", Action onConfrim = null)
+        public void ShowMessage(string headerText, string contentText, Sprite bottom, Sprite top, string coinAmount, string GemAmount, string confrirmText = "Yeay", Action onConfrim = null)
 		{
 			SetHeader(headerText);
 			SetChest(bottom, top);

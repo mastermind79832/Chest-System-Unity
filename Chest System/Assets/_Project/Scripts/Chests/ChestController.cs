@@ -21,7 +21,7 @@ namespace ChestSystem.Chest
 		[SerializeField]
 		private Image m_Chestbottom;
 
-        private ChestSO chestModel;
+        private ChestTypeSO chestModel;
 
 		private float m_PrevTime; // used to store the time just before decreasing the timer
         private float m_Timer;
@@ -40,7 +40,7 @@ namespace ChestSystem.Chest
 
 		public bool IsState(ChestState state) => m_State == state;
 
-		public void Initialize(ChestSO newChestType)
+		public void Initialize(ChestTypeSO newChestType)
 		{
 			chestModel = newChestType;
 			ChangeState(ChestState.Locked);

@@ -11,9 +11,11 @@ namespace ChestSystem.Chest
         public int Max;
 	}
 
-	[CreateAssetMenu(menuName = "Chest/New Chest", fileName = "New Chest Type")]
-    public class ChestSO : ScriptableObject
+    [CreateAssetMenu(menuName = "Chest/New Chest Type", fileName = "New Chest Type")]
+    public class ChestTypeSO : ScriptableObject
     {
+        public string ChestName;
+
 		[Header("Goodies")]
         public RangePacketInt CoinRange;
         public RangePacketInt GemRange;
