@@ -1,5 +1,5 @@
 # Chest-System-Unity
- This is a Chest ssytem like Clash royale
+ This is a Chest system like Clash royale
  
 # feature
 - Can create any no of chests
